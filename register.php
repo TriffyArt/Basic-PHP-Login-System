@@ -40,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <form method="post">
-            <input type="text" name="first_name" placeholder="First Name" required 
+            <input type="text" name="first_name" placeholder="First Name" value="<?php if(isset($_POST['first_name'])) echo $_POST['first_name']?>" required 
                 style="display: block; width: 90%; margin: 10px 0; padding: 10px; text-align: left;">
-            <input type="text" name="last_name" placeholder="Last Name" required 
+            <input type="text" name="last_name" placeholder="Last Name" value="<?php if(isset($_POST['last_name'])) echo $_POST['last_name']?>" required 
                 style="display: block; width: 90%; margin: 10px 0; padding: 10px; text-align: left;">
-            <input type="text" name="contact_number" placeholder="Contact Number" required 
+            <input type="text" name="contact_number" placeholder="Contact Number" value="<?php if(isset($_POST['contact_number'])) echo $_POST['contact_number']?>" required 
                 style="display: block; width: 90%; margin: 10px 0; padding: 10px; text-align: left;">
             <input type="text" name="username" placeholder="Username" required 
                 style="display: block; width: 90%; margin: 10px 0; padding: 10px; text-align: left;">
