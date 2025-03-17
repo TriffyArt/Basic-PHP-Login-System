@@ -54,29 +54,39 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Edit User</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+    </style>
 </head>
-<body style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0;">
-    <div style="width: 700px; background-color: white; border: solid black 2px; padding: 20px; text-align: center;">
-        <h1>Edit User Details</h1>
+
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: rgb(204, 232, 208); font-family: Poppins, sans-serif; font-weight: 400;">
+
+    <div style="background: white; padding: 50px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(148, 241, 204, 0.3); text-align: center; width: 400px;">
+
+        <h1 style="margin-bottom: 10px;">Edit User Details</h1>
+        
         <form action="edit_user.php?id=<?php echo $user['id']; ?>" method="POST">
-            <label>First Name:</label><br>
-            <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" required style="width: 90%; padding: 10px; margin: 5px;"><br>
-            
-            <label>Last Name:</label><br>
-            <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" required style="width: 90%; padding: 10px; margin: 5px;"><br>
-            
-            <label>Contact Number:</label><br>
-            <input type="text" name="contact_number" value="<?php echo $user['contact_number']; ?>" required style="width: 90%; padding: 10px; margin: 5px;"><br>
-            
-            <label>Username:</label><br>
-            <input type="text" name="username" value="<?php echo $user['username']; ?>" required style="width: 90%; padding: 10px; margin: 5px;"><br>
-            
-            <label>Password:</label><br>
-            <input type="password" name="password" placeholder="New Password" required style="width: 90%; padding: 10px; margin: 5px;"><br>
-            
-            <button type="submit" style="width: 90%; padding: 10px; background-color:#4267B2; color: white; border: none; cursor: pointer; margin: 10px 0;">Update User</button>
+            <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" placeholder="First Name" required 
+                style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+                
+            <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" placeholder="Last Name" required 
+                style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+                
+            <input type="text" name="contact_number" value="<?php echo $user['contact_number']; ?>" placeholder="Contact Number" required 
+                style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+                
+            <input type="text" name="username" value="<?php echo $user['username']; ?>" placeholder="Username" required 
+                style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+                
+            <input type="password" name="password" placeholder="New Password" required 
+                style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+                
+            <button type="submit" style="width: 95%; padding: 10px; background-color: #68ace0; color: white; border: none; cursor: pointer; margin-top: 10px; border-radius: 5px;">Update User</button>
         </form>
-        <a href="welcome.php" style="text-decoration: none; color: black; display: block; margin-top: 10px;">Back to Users List</a>
+
+        <a href="welcome.php" style="display: inline-block; padding: 10px 20px; background-color: black; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px;">Back to Users List</a>
     </div>
+
 </body>
 </html>
+
