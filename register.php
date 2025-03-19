@@ -1,6 +1,8 @@
 <?php
 include 'connection.php';
 
+$error_message = ""; 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -11,10 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query("SELECT * FROM user WHERE username='$username'");
 
     if ($result->num_rows > 0) {
-        echo "Username already exists.";
+        $error_message = "Username already exists.";
     } else {
         $conn->query("INSERT INTO user (first_name, last_name, contact_number, username, password) 
                       VALUES ('$first_name', '$last_name', '$contact_number', '$username', '$password')");
+        
+        header("Location: login.php");
+        exit;
     }
 }
 ?>
@@ -51,12 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="password" placeholder="Password" required 
                 style="display: block; width: 90%; margin: 10px 0; padding: 10px; text-align: left;">
 
+                <?php if (!empty($error_message)): ?>
+                     <p style="color: red; font-weight: 500;"><?php echo $error_message; ?></p>
+                <?php endif; ?>
+
             <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
                 <button type="submit" style="width: 45%; padding: 10px; cursor: pointer; background-color: rgb(104, 172, 224); border: none;">Register</button>
                 <a href="login.php" style="width: 45%;">
                     <button type="button" style="width: 100%; padding: 10px; cursor: pointer; border: none;">Login</button>
-                </a>
-            </div>
+                </a> 
+            </div> 
 
         </form>
 
