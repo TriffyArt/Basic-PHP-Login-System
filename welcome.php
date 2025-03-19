@@ -67,7 +67,7 @@ if (isset($_POST['delete'])) {
                             <td style='padding: 10px;'>
                                 <form method='POST' style='display:inline;'>
                                     <input type='hidden' name='id' value='{$row['id']}'>
-                                    <button type='submit' name='delete' style='color: white; background-color: red; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px;'>Delete</button>
+                                    <button type='submit' name='delete' onclick='return confirmDelete()' style='color: white; background-color: red; border: none; padding: 5px 10px; cursor: pointer; border-radius: 5px;'>Delete</button>
                                 </form> 
 
                                 <a href='edit_user.php?id={$row['id']}' style='color: white; background-color: #4267B2; padding: 5px 10px; text-decoration: none; display: inline-block; border-radius: 5px;'>Edit</a>
@@ -82,6 +82,12 @@ if (isset($_POST['delete'])) {
         <br>
         <a href="login.php" style="display: inline-block; padding: 10px 20px; background-color: black; color: white; text-decoration: none; border-radius: 5px;">Logout</a>
     </div>
+
+    <script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this user?");
+    }
+    </script>
 
 </body>
 </html>
