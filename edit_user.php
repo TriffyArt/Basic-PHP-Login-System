@@ -1,6 +1,8 @@
 <?php
 include 'connection.php';
 
+$error_message = ""; 
+
 // Check if the ID is provided
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -31,22 +33,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last_name = $_POST['last_name'];
     $contact_number = $_POST['contact_number'];
     $username = $_POST['username'];
-    $password = $_POST['password'];  // Password should be hashed in a real system
+    $password = $_POST['password'];  
 
+   
+    $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND id != ?");
+    $stmt->bind_param("si", $username, $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $error_message = "Username already exists.";
+    } else {
+        
     $update_sql = "UPDATE user SET first_name = ?, last_name = ?, contact_number = ?, username = ?, password = ? WHERE id = ?";
     $stmt = $conn->prepare($update_sql);
     $stmt->bind_param("sssssi", $first_name, $last_name, $contact_number, $username, $password, $id);
 
-    if ($stmt->execute()) {
-        echo "<script>alert('User updated successfully!'); window.location.href='welcome.php';</script>";
-    } else {
-        echo "<script>alert('Error updating user!');</script>";
+        if ($stmt->execute()) {
+            echo "<script>alert('User updated successfully!'); window.location.href='welcome.php';</script>";
+        } else {
+            echo "<script>alert('Error updating user!');</script>";
+        }
+
+        $stmt->close();
     }
 
     $stmt->close();
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +93,10 @@ $conn->close();
                 
             <input type="password" name="password" placeholder="New Password" required 
                 style="display: block; width: 90%; margin: 10px auto; padding: 10px; text-align: center;">
+
+            <?php if (!empty($error_message)): ?>
+                <p style="color: red; font-weight: 500;"><?php echo $error_message; ?></p>
+            <?php endif; ?>
                 
             <button type="submit" style="width: 95%; padding: 10px; background-color: #68ace0; color: white; border: none; cursor: pointer; margin-top: 10px; border-radius: 5px;">Update User</button>
         </form>
